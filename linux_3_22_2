@@ -1,0 +1,17 @@
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <wait.h>
+int main(){
+	pid_t pid;  //创建一个进程，给它一个pid
+	pid = fork();
+	if(pid==0){
+		execlp("mkdir","mkdir","test1",NULL);
+		execlp("ls","ls",NULL);
+		exit(0);
+	}else{
+		wait(NULL);
+	}
+	return 0;
+}
+
