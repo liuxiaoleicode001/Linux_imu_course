@@ -1,0 +1,22 @@
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+        int i;
+        int n = 10;
+        pid_t pid;  //创建一个进程，给它一个pid
+        for(i = 0;i < n;i++)  //循环创建
+        {
+                pid = fork();  //该进程作为父进程fork出子进程
+                if (pid < 0){  //出错，pid < 0
+                        perror("fork error");
+                        exit(1);  //退出程序
+                } else if (pid > 0) {   //父进程pid > 0
+                        break;  //父进程退出循环，子进程继续循环
+                }
+        }
+                printf("pid = %d, ppid = %d\n", getpid(), getppid());
+                sleep(1);  //等待，给进程创建反应时间
+}
+
